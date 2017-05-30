@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - ASP.NET MVC 5 Music Store</title>
+    @Styles.Render("~/Content/Site.css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <div id="header">
+        <h1>
+            <a href="/">
+                ASP.NET MVC MUSIC
+                STORE
+            </a>
+        </h1>
+        <ul id="navlist">
+            <li class="first">
+                <a href="#">Hello @HttpContext.Current.Session["UserName"]</a>
+            </li>
+            <li>
+                <a href="@Url.Content("~")" id="current">
+                    Home
+                </a>
+            </li>
+            <li><a href="@Url.Content("~/Store/")">Store</a></li>
+            @if (@HttpContext.Current.Session["UserName"] != null) {
+                <li>@Html.ActionLink("Log Off", "LogIn", "Account")</li>
+            } else {
+                <li><a href="@Url.Content("~/Account/LogIn/")">Log In</a></li>
+            }
+            <li>@{Html.RenderAction("CartSummary", "ShoppingCart");}</li>
+            <li>
+                <a href="@Url.Content("~/StoreManager/")">
+                    Admin
+                </a>
+            </li>
+        </ul>
+    </div>
+    @{Html.RenderAction("GenreMenu", "Store");}
+    <div id="main">
+        @RenderBody()
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+    </div>
+    <div id="footer">
+        built with <a href="http://asp.net/mvc">ASP.NET MVC 3 but updated to MVC 5</a>
+    </div>
+</body>
+
+
+</html>
+<!--<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @@Html.ActionLink("ASP.NET MVC 5 Music Store", "Home", "Store", new { area = "" }, new { @@class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@@Html.ActionLink("Contact", "Contact", "Home")</li>
+                </ul>
+                @@Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @@RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @@DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    @@Scripts.Render("~/bundles/jquery")
+    @@Scripts.Render("~/bundles/bootstrap")
+    @@RenderSection("scripts", required: false)
+</body>
+</html>
+    -->
